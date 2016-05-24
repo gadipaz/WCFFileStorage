@@ -36,13 +36,13 @@ namespace ClientFileStorage
                 Content = File.ReadAllBytes(filePath)
             };
             response = new FileServiceClient().Put(createdFile);
-            if (response.ResponseStatus != "Successful")
+            if (response.ResponseStatus.Equals("Successful"))
             {
-                int i = 5;
+                //TODO: Hurray
             }
             else
             {
-                int i = 5;
+                //TODO: Bummer
             }
         }
     }
