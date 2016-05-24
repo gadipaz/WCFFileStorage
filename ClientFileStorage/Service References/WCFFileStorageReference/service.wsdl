@@ -40,43 +40,24 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/WCFFileStorage" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IFileService_GetData_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetData" />
+  <wsdl:message name="IFileService_Put_InputMessage">
+    <wsdl:part name="parameters" element="tns:Put" />
   </wsdl:message>
-  <wsdl:message name="IFileService_GetData_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataResponse" />
-  </wsdl:message>
-  <wsdl:message name="IFileService_GetDataUsingDataContract_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
-  </wsdl:message>
-  <wsdl:message name="IFileService_GetDataUsingDataContract_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  <wsdl:message name="IFileService_Put_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PutResponse" />
   </wsdl:message>
   <wsdl:portType name="IFileService">
-    <wsdl:operation name="GetData">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/GetData" message="tns:IFileService_GetData_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/GetDataResponse" message="tns:IFileService_GetData_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/GetDataUsingDataContract" message="tns:IFileService_GetDataUsingDataContract_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/GetDataUsingDataContractResponse" message="tns:IFileService_GetDataUsingDataContract_OutputMessage" />
+    <wsdl:operation name="Put">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFileService/Put" message="tns:IFileService_Put_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFileService/PutResponse" message="tns:IFileService_Put_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IFileService" type="tns:IFileService">
     <wsp:PolicyReference URI="#NetTcpBinding_IFileService_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="GetData">
-      <soap12:operation soapAction="http://tempuri.org/IFileService/GetData" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <soap12:operation soapAction="http://tempuri.org/IFileService/GetDataUsingDataContract" style="document" />
+    <wsdl:operation name="Put">
+      <soap12:operation soapAction="http://tempuri.org/IFileService/Put" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

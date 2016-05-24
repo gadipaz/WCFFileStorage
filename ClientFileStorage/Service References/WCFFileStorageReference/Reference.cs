@@ -15,18 +15,18 @@ namespace ClientFileStorage.WCFFileStorageReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/WCFFileStorage")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FileTransferRequest", Namespace="http://schemas.datacontract.org/2004/07/WCFFileStorage")]
     [System.SerializableAttribute()]
-    public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class FileTransferRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool BoolValueField;
+        private byte[] ContentField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StringValueField;
+        private string FileNameField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -39,27 +39,120 @@ namespace ClientFileStorage.WCFFileStorageReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BoolValue {
+        public byte[] Content {
             get {
-                return this.BoolValueField;
+                return this.ContentField;
             }
             set {
-                if ((this.BoolValueField.Equals(value) != true)) {
-                    this.BoolValueField = value;
-                    this.RaisePropertyChanged("BoolValue");
+                if ((object.ReferenceEquals(this.ContentField, value) != true)) {
+                    this.ContentField = value;
+                    this.RaisePropertyChanged("Content");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StringValue {
+        public string FileName {
             get {
-                return this.StringValueField;
+                return this.FileNameField;
             }
             set {
-                if ((object.ReferenceEquals(this.StringValueField, value) != true)) {
-                    this.StringValueField = value;
-                    this.RaisePropertyChanged("StringValue");
+                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
+                    this.FileNameField = value;
+                    this.RaisePropertyChanged("FileName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FileTransferResponse", Namespace="http://schemas.datacontract.org/2004/07/WCFFileStorage")]
+    [System.SerializableAttribute()]
+    public partial class FileTransferResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CreateAtField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ResponseStatusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CreateAt {
+            get {
+                return this.CreateAtField;
+            }
+            set {
+                if ((this.CreateAtField.Equals(value) != true)) {
+                    this.CreateAtField = value;
+                    this.RaisePropertyChanged("CreateAt");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FileName {
+            get {
+                return this.FileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FileNameField, value) != true)) {
+                    this.FileNameField = value;
+                    this.RaisePropertyChanged("FileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ResponseStatus {
+            get {
+                return this.ResponseStatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ResponseStatusField, value) != true)) {
+                    this.ResponseStatusField = value;
+                    this.RaisePropertyChanged("ResponseStatus");
                 }
             }
         }
@@ -78,17 +171,11 @@ namespace ClientFileStorage.WCFFileStorageReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WCFFileStorageReference.IFileService")]
     public interface IFileService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/GetData", ReplyAction="http://tempuri.org/IFileService/GetDataResponse")]
-        string GetData(int value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Put", ReplyAction="http://tempuri.org/IFileService/PutResponse")]
+        ClientFileStorage.WCFFileStorageReference.FileTransferResponse Put(ClientFileStorage.WCFFileStorageReference.FileTransferRequest fileToPush);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/GetData", ReplyAction="http://tempuri.org/IFileService/GetDataResponse")]
-        System.Threading.Tasks.Task<string> GetDataAsync(int value);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IFileService/GetDataUsingDataContractResponse")]
-        ClientFileStorage.WCFFileStorageReference.CompositeType GetDataUsingDataContract(ClientFileStorage.WCFFileStorageReference.CompositeType composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IFileService/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<ClientFileStorage.WCFFileStorageReference.CompositeType> GetDataUsingDataContractAsync(ClientFileStorage.WCFFileStorageReference.CompositeType composite);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFileService/Put", ReplyAction="http://tempuri.org/IFileService/PutResponse")]
+        System.Threading.Tasks.Task<ClientFileStorage.WCFFileStorageReference.FileTransferResponse> PutAsync(ClientFileStorage.WCFFileStorageReference.FileTransferRequest fileToPush);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -118,20 +205,12 @@ namespace ClientFileStorage.WCFFileStorageReference {
                 base(binding, remoteAddress) {
         }
         
-        public string GetData(int value) {
-            return base.Channel.GetData(value);
+        public ClientFileStorage.WCFFileStorageReference.FileTransferResponse Put(ClientFileStorage.WCFFileStorageReference.FileTransferRequest fileToPush) {
+            return base.Channel.Put(fileToPush);
         }
         
-        public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
-            return base.Channel.GetDataAsync(value);
-        }
-        
-        public ClientFileStorage.WCFFileStorageReference.CompositeType GetDataUsingDataContract(ClientFileStorage.WCFFileStorageReference.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContract(composite);
-        }
-        
-        public System.Threading.Tasks.Task<ClientFileStorage.WCFFileStorageReference.CompositeType> GetDataUsingDataContractAsync(ClientFileStorage.WCFFileStorageReference.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContractAsync(composite);
+        public System.Threading.Tasks.Task<ClientFileStorage.WCFFileStorageReference.FileTransferResponse> PutAsync(ClientFileStorage.WCFFileStorageReference.FileTransferRequest fileToPush) {
+            return base.Channel.PutAsync(fileToPush);
         }
     }
 }

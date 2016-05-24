@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,29 @@ namespace ClientFileStorage
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            FileServiceClient myService = new FileServiceClient();
-            MessageBox.Show(myService.GetData(123), "My Service");
-            myService.Close();
+            FileTransferResponse response = null;
+            OpenFileDialog file = new OpenFileDialog();
+            string fileName = "";            
+            string filePath = "";
+            if (file.ShowDialog() == DialogResult.OK)
+            {
+                filePath = file.FileName;
+                fileName = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+            }
+            FileTransferRequest createdFile = new FileTransferRequest()
+            {
+                FileName = fileName,
+                Content = File.ReadAllBytes(filePath)
+            };
+            response = new FileServiceClient().Put(createdFile);
+            if (response.ResponseStatus != "Successful")
+            {
+                int i = 5;
+            }
+            else
+            {
+                int i = 5;
+            }
         }
     }
 }
